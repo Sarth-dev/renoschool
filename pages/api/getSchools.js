@@ -1,4 +1,4 @@
-import connectDB from "../lib/db";
+import connectDB from "../../src/app/lib/db";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {

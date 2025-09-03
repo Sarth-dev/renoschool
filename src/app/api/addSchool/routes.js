@@ -1,4 +1,4 @@
-import { connectDB } from "../../../../pages/lib/db";
+import { connectDB } from "../../lib/db";
 
 export async function POST(req) {
   try {

@@ -1,7 +1,7 @@
 import formidable from "formidable";
 import fs from "fs";
 import path from "path";
-import connectDB from "../lib/db";
+import connectDB from "../../src/app/lib/db";
 
 export const config = {
   api: {
