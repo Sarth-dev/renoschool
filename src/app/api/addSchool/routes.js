@@ -1,5 +1,4 @@
-// app/api/addSchool/route.js
-import { connectDB } from "@/lib/db";
+import { connectDB } from "../../../../pages/lib/db";
 
 export async function POST(req) {
   try {

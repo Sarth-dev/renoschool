@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/db";
+import connectDB  from "../../../../pages/lib/db";
 
 export default async function GET() {
   try {
