@@ -1,14 +1,12 @@
-import connectDB  from "../../lib/db";
+import connectDB from "../../lib/db";
 
-export default async function GET() {
+export default async function handler(req, res) {
   try {
     const db = await connectDB();
-    const [rows] = await db.execute("SELECT * FROM schools");
-    console.log("Fetched schools:", rows);
-
-    return new Response(JSON.stringify(rows), { status: 200 });
-  } catch (error) {
-    console.error("Error fetching schools:", error);
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    const [rows] = await db.query("SELECT * FROM schools");
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("DB error:", err);
+    res.status(500).json({ error: "Database connection failed" });
   }
 }

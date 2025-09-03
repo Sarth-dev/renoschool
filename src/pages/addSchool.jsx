@@ -7,18 +7,33 @@ export default function AddSchool() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [message, setMessage] = useState("");
 
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => formData.append(key, data[key]));
-    formData.append("image", data.image[0]);
+const onSubmit = async (data) => {
+  const formData = new FormData();
 
-    try {
-      await axios.post("http://localhost:3000/api/addSchool", formData);
-      setMessage("School added successfully!");
-    } catch (err) {
-      setMessage("Error adding school");
-    }
-  };
+  // Append only normal text fields
+  formData.append("name", data.name);
+  formData.append("address", data.address);
+  formData.append("city", data.city);
+  formData.append("state", data.state);
+  formData.append("contact", data.contact);
+  formData.append("email_id", data.email_id);
+
+  // Append file (if selected)
+  if (data.image && data.image[0]) {
+    formData.append("image", data.image[0]);
+  }
+
+  try {
+    await axios.post("/api/addSchool", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    setMessage("School added successfully!");
+  } catch (err) {
+    console.error("Upload error:", err);
+    setMessage("Error adding school");
+  }
+};
+
 
   return (
     <div className="min-h-screen text-black flex items-center justify-center bg-gray-50 py-10">
